@@ -8,8 +8,10 @@ October 11, 2020
 
 Assignment 2 (Total points: 75)
 Due date: October 28, 2019; Time: 23:59 Hrs.
-Differences Between Processes and Threads (points:
-30
+
+
+Differences Between Processes and Threads (points:30)
+
 QUESTION 1 
 As you know by now when fork() results in complete duplication of all process memories, while pthread create() results only in partial. Your exercise is to write a program where a global variable is initialized to a value of say 10. At some point, the program fork()s and creates a child process. The parent process increments the global variable linearly upto 100 (i.e. 11, 12, 13....,100). The child process does the opposite, i.e. decrements linearly upto -90. Both the parent and child processes should print the value of the variable.
 
