@@ -1,0 +1,43 @@
+CSE 231 Operating Systems Monsoon 2020
+Sambuddho Chakravarty, Arani Bhattacharya
+
+October 11, 2020
+
+Assignment 2 (Total points: 75)
+
+-Sejal
+2019102
+
+Q1)
+As mentioned in the question, n should be a global variable. I’ve initialised it at the very
+start of the code. I then called fork(). As it is known, fork() returns an integer value, which
+is zero in case of a child. Therefore I made an if condition where I compared it’s value
+with zero and as given in the question, the child process was to decrease the global
+variable each time by 1 till it is lesser than -90. Otherwise for the parent process, (I used
+waitpid in order to wait for the child process to change its state after its completion)
+global variable is incremented each time till it is greater than or equal to 100.
+#Note global variable n=10.
+
+Similarly for the pthread_create code, I’ve created a method as my child process
+which also is a part of pthread_create arguments (referencing and dereferencing).
+pthread_create takes 4 arguments, pthread_t *thread, const pthread_attr_t *attr, void
+*(*start_routine)(void*) and void *arg. On successfully creating a thread, pthread_create
+returns 0. After calling this, I printed using the parent process by increasing the variable
+by 1 each time till it reaches 100.
+
+How does it work?
+Fork() works on a duplicate copy of the global variable. The changes made while the
+parent and child processes (increment and decrement) does not affect the original value
+of the global variable. This can also be explained using the example of our code, firstly,
+the child process works and it decreases the value by each time and therefore
+9,8,7,6,.......,0,-1,-2,-3.......,-89,-90 is printed. The original global variable value remains
+the same and while going through the parent process, 11,12,13,....100 is printed. No
+change in value of n is observed. Global variables aren’t shared between processes
+after a fork() call.
+
+In case of part2 code, memory is shared between threads (processes) when
+pthread_create is called. Therefore when the child process runs, it makes changes in the
+global variable itself and no copy is created in this case. When the child process works, it
+prints 9,8,7,.....,0,-1,-2,....-90. The value of the global variable now changes to -90. When
+the parent process comes into play, it increases the value and therefore prints
+-89,-88,-87,....,0,1,2,3,....100.
