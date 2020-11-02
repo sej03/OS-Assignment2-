@@ -1,0 +1,31 @@
+CSE 231 Operating Systems Monsoon 2020
+Sambuddho Chakravarty, Arani Bhattacharya
+
+October 11, 2020
+
+Assignment 2 (Total points: 75)
+
+-Sejal
+2019102
+
+Q2)
+Code
+There are two arguments which are to be passed while calling the system call, pid_t pid
+and file pointer/name. Our task is to find a process (with the same pid as passed in the
+arguments) and print some of its data fields. I’ve printed 4 of its data fields (state, pid,
+process name i.e. comm and priority number). I used for_each_process, which lets you
+iterate through each of the processes. I then compared pid (argument passed) with the
+processes’ pid, if there appears to be a match, all the important data fields of the process
+are printed.
+Whatever I printed is also stored in a buff char array (using snprintf). I stored
+filp_open (taking 3 arguments, file location, flags and a permission to access the file by
+reading or writing) value in a variable and later used it while passing it as an argument in
+the kernel_write method . kernel_write writes to the file given as an argument.
+Characters from the buff array are written to the file.
+Errors handled
+● If an incorrect pid is passed (no such process with that pid)
+● If the file is inaccessible (maybe because of permissions allotted)
+Inputs and test file
+I’ve created a function itself which returns a long value given by the syscall. perror
+occurs when this value is lesser than zero (error) and otherwise a normal print
+statement.
